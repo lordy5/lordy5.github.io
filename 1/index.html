@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>  
+    <head>  
+        <title> Project 1</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+        </style>
+    </head>
+    <body>  
+        <h1>Project 1</h1>
+        <section>
+        <h2>Exhaustive Search for Small Images</h2>
+        <p>First, I implemented an exhaustive search to align the image channels for the provided jpeg images. Specifically, 
+            I wrote a function called <em>align</em> which takes in two image channels as inputs, as well as a range of how
+            many pixels to search in each direction, and an offset for where to start searching. The function works by 
+            considering every possible displacement of one channel with respect to the other, starting from the provided 
+            offset and within the provided range (for example (-15, 15)). To "score" each possible displacement, I initially
+            used Euclidean distance between the two arrays (one for each channel), then switched to Normalized Cross 
+            Correlation which had better results. However, as I will explain later, due to one particular image I changed 
+            <em>align</em> to first perform Sobel edge detection on each channel, and then compute the Euclidean distance 
+            between the detected edges. For the provided jpeg images, I just called <em>align</em> twice, passing in the 
+            blue channel as the reference both times with either the red or green channel as well. 
+            I additionally cropped each channel by 10% on each side in order to remove some borders which were 
+            causing my algorithm no not align the channels correctly. When calling <em>align</em>, I used an offset of zero 
+            with a range of 15 pixels. These were the resulting images: 
+        </p>
+        <img src="file:///Users/alex/Documents/fa24/cs180/lordy5.github.io/1/media/cathedral.jpg" alt="cathedral">
+        <img src="./1/media/monastery.jpg" alt="monastery">
+        <img src="./1/media/tobolsk.jpg" alt="tobolsk">
+        </section>
+        
+        <section>
+        <h2>Image Pyramid for Larger Images</h2>
+        <p>For the larger TIF images, I implemented a</p>
+        </section>
+    </body>
+    
+</html>
