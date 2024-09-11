@@ -8,6 +8,24 @@
                 font-family: Arial, sans-serif;
                 margin: 20px;
             }
+
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                text-align: center;
+            }
+
+            .grid_large {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                text-align: center;
+            }
+
+            .caption {
+                margin-top: 12px;
+            }
         </style>
     </head>
     <body>  
@@ -25,12 +43,33 @@
             between the detected edges. For the provided jpeg images, I just called <em>align</em> twice, passing in the 
             blue channel as the reference both times with either the red or green channel as well. 
             I additionally cropped each channel by 10% on each side in order to remove some borders which were 
-            causing my algorithm no not align the channels correctly. When calling <em>align</em>, I used an offset of zero 
+            causing my algorithm to not align the channels correctly. When calling <em>align</em>, I used an offset of zero 
             with a range of 15 pixels. These were the resulting images: 
         </p>
-        <img src="media/cathedral.jpg" alt="cathedral">
-        <img src="media/monastery.jpg" alt="monastery">
-        <img src="media/tobolsk.jpg" alt="tobolsk">
+
+        <p>Note that for each image, I have the resulting displacement of the red and green channels with respect 
+            to the blue channel. These are in the form <b>(vertical disp., horizontal disp.)</b>.
+        </p>
+
+        <div class="grid">
+            <div>
+                <div class="caption">Green: (5, 2), Red: (12, 3)</div>
+                <img src="media/cathedral.jpg" alt="cathedral">
+            </div>
+            <div>
+                <div class="caption">Green: (-3, 2), Red: (3, 2)</div>
+                <img src="media/monastery.jpg" alt="monastery">
+            </div>
+            <div>
+                <div class="caption">Green: (3, 2), Red: (6, 3)</div>
+                <img src="media/tobolsk.jpg" alt="tobolsk">
+            </div>
+            
+            
+            
+        </div>
+
+        
         </section>
         
         <section>
@@ -48,16 +87,69 @@
             in the blue channel as the reference along with either the red or green channel. I also used 9 levels in the 
             pyramids, with a search range of 30 pixels.
         </p>
-        <img src="media/church.jpg" alt="church" style="width: 40%">
-        <img src="media/harvesters.jpg" alt="harvesters" style="width: 40%">
-        <img src="media/icon.jpg" alt="icon" style="width: 40%">
-        <img src="media/lady.jpg" alt="lady" style="width: 40%">
-        <img src="media/melons.jpg" alt="melons" style="width: 40%">
-        <img src="media/onion_church.jpg" alt="onion church" style="width: 40%">
-        <img src="media/sculpture.jpg" alt="sculpture" style="width: 40%">
-        <img src="media/self_portrait.jpg" alt="self_portrait" style="width: 40%">
-        <img src="media/three_generations.jpg" alt="three_generations" style="width: 40%">
-        <img src="media/train.jpg" alt="train" style="width: 40%">
+        <div class="grid_large">
+            <div>
+                <div class="caption">Green: (25, 3), Red: (58, -5)</div>
+                <img src="media/church.jpg" alt="church" style="width: 80%">
+            </div>
+            
+
+            <div>
+                <div class="caption">Green: (60, 16), Red: (123, 13)</div>
+                <img src="media/harvesters.jpg" alt="harvesters" style="width: 80%">
+            </div>
+            
+
+            <div>
+                <div class="caption">Green: (40, 17), Red: (89, 23)</div>
+                <img src="media/icon.jpg" alt="icon" style="width: 80%">
+            </div>
+            
+
+            <div>
+                <div class="caption">Green: (56, 9), Red: (120, 12)</div>
+                <img src="media/lady.jpg" alt="lady" style="width: 80%">
+            </div>
+            
+
+            <div>
+                <div class="caption">Green: (81, 12), Red: (178, 16)</div>
+                <img src="media/melons.jpg" alt="melons" style="width: 80%">
+            </div>
+            
+
+            <div>
+                <div class="caption">Green: (51, 25), Red: (108, 36)</div>
+                <img src="media/onion_church.jpg" alt="onion church" style="width: 80%">
+            </div>
+            
+
+            <div>
+                <div class="caption">Green: (33, -11), Red: (140, -28)</div>
+                <img src="media/sculpture.jpg" alt="sculpture" style="width: 80%">
+            </div>
+            
+
+            <div>
+                <div class="caption">Green: (80, 32), Red: (176, 38)</div>
+                <img src="media/self_portrait.jpg" alt="self_portrait" style="width: 80%">
+            </div>
+            
+
+            <div>
+                <div class="caption">Green: (54, 13), Red: (113, 11)</div>
+                <img src="media/three_generations.jpg" alt="three_generations" style="width: 80%">
+            </div>
+            
+
+            <div>
+                <div class="caption">Green: (41, 0), Red: (85, 29)</div>
+                <img src="media/train.jpg" alt="train" style="width: 80%">
+            </div>
+            
+        </div>
+
+       
         
         </section>
 
@@ -88,7 +180,11 @@
             Fortunately this fixed the issue, and the Emir was now aligned correctly. Luckily, this adjustment still 
             worked on all of the other images.
         </p>
-        <img src="media/emir.jpg" alt="emir" style="width: 40%">
+        <div>
+            <div class="caption">Green: (49, 24), Red: (107, 50)</div>
+            <img src="media/emir.jpg" alt="emir" style="width: 40%">
+        </div>
+        
 
         <h2>
             Bells and Whistles
@@ -105,17 +201,46 @@
             of intensity as 1, had good results. Below are some of the images that I found were most improved by 
             this auto contrasting: left is before and right is after
         </p>
-        <img src="media/melons.jpg" alt="melons before" style="width: 40%">
-        <img src="media/melons_auto_contrast.jpg" alt="melons after" style="width: 40%">
 
-        <img src="media/lady.jpg" alt="lady before" style="width: 40%">
-        <img src="media/lady_auto_contrast.jpg" alt="lady after" style="width: 40%">
+        <div class="grid_large">
+            <div>
+                <img src="media/melons.jpg" alt="melons before" style="width: 80%">
+            </div>
 
-        <img src="media/three_generations.jpg" alt="3g before" style="width: 40%">
-        <img src="media/three_generations_auto_contrast.jpg" alt="lady after" style="width: 40%">
+            <div>
+                <img src="media/melons_auto_contrast.jpg" alt="melons after" style="width: 80%">
+            </div>
+            
+    
+            <div>
+                <img src="media/lady.jpg" alt="lady before" style="width: 80%">
+                
+            </div>
 
-        <img src="media/self_portrait.jpg" alt="3g before" style="width: 40%">
-        <img src="media/self_portrait_auto_contrast.jpg" alt="lady after" style="width: 40%">
+            <div>
+                <img src="media/lady_auto_contrast.jpg" alt="lady after" style="width: 80%">
+            </div>
+            
+    
+            <div>
+                <img src="media/three_generations.jpg" alt="3g before" style="width: 80%">
+                
+            </div>
+            
+            <div>
+                <img src="media/three_generations_auto_contrast.jpg" alt="lady after" style="width: 80%">
+            </div>
+    
+            <div>
+                <img src="media/self_portrait.jpg" alt="3g before" style="width: 80%">
+                
+            </div>
+
+            <div>
+                <img src="media/self_portrait_auto_contrast.jpg" alt="lady after" style="width: 80%">
+            </div>
+            
+        </div>
 
         </section>
     </body>
